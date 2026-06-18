@@ -1,0 +1,352 @@
+<!doctype html>
+<html lang="ms">
+ <head><script src="/_sdk/telemetry_sdk.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eksperimen Maya Sains Tingkatan 4</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <style>
+        body { font-family: 'DM Sans', sans-serif; }
+        .drop-zone { min-height: 36px; min-width: 80px; border: 2px dashed #6366f1; border-radius: 8px; display: inline-flex; align-items: center; justify-content: center; padding: 4px 12px; margin: 2px 4px; vertical-align: middle; transition: all 0.2s; }
+        .drop-zone.filled { border-style: solid; background: #e0e7ff; border-color: #4f46e5; }
+        .drop-zone.drag-over { background: #c7d2fe; transform: scale(1.05); }
+        .drag-item { background: #fbbf24; color: #1e1b4b; padding: 6px 14px; border-radius: 8px; cursor: grab; display: inline-block; margin: 4px; font-weight: 500; user-select: none; touch-action: none; transition: transform 0.15s; }
+        .drag-item:active { cursor: grabbing; transform: scale(0.95); }
+        .drag-item.dragging { opacity: 0.5; }
+        .drag-item.used { opacity: 0.4; pointer-events: none; }
+        .section { display: none; }
+        .section.active { display: block; }
+        .procedure-slot { min-height: 50px; border: 2px dashed #10b981; border-radius: 8px; padding: 10px; margin: 6px 0; transition: all 0.2s; }
+        .procedure-slot.filled { border-style: solid; background: #d1fae5; }
+        .procedure-slot.drag-over { background: #a7f3d0; }
+        .table-drop { min-width: 60px; min-height: 32px; border: 2px dashed #f59e0b; border-radius: 6px; display: inline-flex; align-items: center; justify-content: center; padding: 2px 8px; }
+        .table-drop.filled { border-style: solid; background: #fef3c7; }
+        .table-drop.drag-over { background: #fde68a; }
+        @media print { .no-print { display: none !important; } }
+    </style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="/_sdk/resizing_sdk.js" type="text/javascript"></script>
+ </head>
+ <body data-template-id="__page-root" class="min-h-screen">
+  <main class="max-w-3xl mx-auto p-4 pb-20"><!-- SECTION 1 -->
+   <div id="section1" class="section active">
+    <div class="text-center py-8">
+     <h1 data-template-id="main-title" class="canva-text text-2xl md:text-3xl font-bold mb-2"></h1>
+     <p data-template-id="subtitle" class="canva-text text-lg mb-8"></p>
+     <div class="max-w-sm mx-auto space-y-4 text-left">
+      <div><label data-template-id="label-nama" class="canva-text font-semibold block mb-1" for="nama"></label> <input id="nama" type="text" class="w-full border-2 border-indigo-300 rounded-lg px-4 py-2 focus:border-indigo-500 outline-none" data-template-id="input-nama">
+      </div>
+      <div><label data-template-id="label-kelas" class="canva-text font-semibold block mb-1" for="kelas"></label> <input id="kelas" type="text" class="w-full border-2 border-indigo-300 rounded-lg px-4 py-2 focus:border-indigo-500 outline-none" data-template-id="input-kelas">
+      </div><button data-template-id="btn-mula" class="canva-button w-full py-3 rounded-xl font-bold text-lg mt-6 transition hover:scale-105" onclick="goToSection(2)"></button>
+     </div>
+    </div>
+   </div><!-- SECTION 2 -->
+   <div id="section2" class="section">
+    <h2 data-template-id="sec2-title" class="canva-text text-xl font-bold mb-4"></h2><!-- Tujuan -->
+    <div class="mb-6 p-4 bg-white/80 rounded-xl shadow">
+     <p data-template-id="label-tujuan" class="canva-text font-bold mb-2"></p>
+     <p class="leading-relaxed">Untuk mengkaji kesan <span class="drop-zone" data-answer="jisim" data-group="tujuan"></span> terhadap <span class="drop-zone" data-answer="inersia" data-group="tujuan"></span></p>
+     <div class="mt-3 flex flex-wrap" id="bank-tujuan"><span class="drag-item" data-value="inersia" data-group="tujuan">inersia</span> <span class="drag-item" data-value="halaju" data-group="tujuan">halaju</span> <span class="drag-item" data-value="jisim" data-group="tujuan">jisim</span> <span class="drag-item" data-value="suhu" data-group="tujuan">suhu</span>
+     </div>
+    </div><!-- Hipotesis -->
+    <div class="mb-6 p-4 bg-white/80 rounded-xl shadow">
+     <p data-template-id="label-hipotesis" class="canva-text font-bold mb-2"></p>
+     <p class="leading-relaxed">Semakin bertambah <span class="drop-zone" data-answer="jisim plastisin" data-group="hipotesis"></span> pada bilah gergaji, semakin lama <span class="drop-zone" data-answer="masa yang diambil untuk 10 ayunan lengkap" data-group="hipotesis"></span></p>
+     <div class="mt-3 flex flex-wrap" id="bank-hipotesis"><span class="drag-item" data-value="masa yang diambil untuk 10 ayunan lengkap" data-group="hipotesis">masa yang diambil untuk 10 ayunan lengkap</span> <span class="drag-item" data-value="panjang bilah" data-group="hipotesis">panjang bilah</span> <span class="drag-item" data-value="jisim plastisin" data-group="hipotesis">jisim plastisin</span> <span class="drag-item" data-value="kelajuan ayunan" data-group="hipotesis">kelajuan ayunan</span>
+     </div>
+    </div><!-- Pemboleh Ubah -->
+    <div class="mb-6 p-4 bg-white/80 rounded-xl shadow">
+     <p data-template-id="label-pu" class="canva-text font-bold mb-2"></p>
+     <p class="mb-1">(i) Dimanipulasikan: <span class="drop-zone" data-answer="Jisim plastisin" data-group="pu"></span></p>
+     <p class="mb-1">(ii) Bergerak balas: <span class="drop-zone" data-answer="Masa yang diambil untuk 10 ayunan lengkap" data-group="pu"></span></p>
+     <p class="mb-1">(iii) Dimalarkan: <span class="drop-zone" data-answer="Panjang bilah gergaji" data-group="pu"></span></p>
+     <div class="mt-3 flex flex-wrap" id="bank-pu"><span class="drag-item" data-value="Panjang bilah gergaji" data-group="pu">Panjang bilah gergaji</span> <span class="drag-item" data-value="Jisim plastisin" data-group="pu">Jisim plastisin</span> <span class="drag-item" data-value="Masa yang diambil untuk 10 ayunan lengkap" data-group="pu">Masa yang diambil untuk 10 ayunan lengkap</span>
+     </div>
+    </div><!-- Radas -->
+    <div class="mb-6 p-4 bg-white/80 rounded-xl shadow">
+     <p data-template-id="label-radas" class="canva-text font-bold mb-2"></p>
+     <p data-template-id="radas-text" class="canva-text"></p>
+    </div><button data-template-id="btn-next2" class="canva-button w-full py-3 rounded-xl font-bold no-print transition hover:scale-105" onclick="goToSection(3)"></button>
+   </div><!-- SECTION 3 -->
+   <div id="section3" class="section">
+    <h2 data-template-id="sec3-title" class="canva-text text-xl font-bold mb-4"></h2><!-- SVG Diagram -->
+    <div class="mb-6 p-4 bg-white/80 rounded-xl shadow flex justify-center">
+     <svg viewbox="0 0 400 250" width="100%" style="max-width:400px" xmlns="http://www.w3.org/2000/svg"><!-- Table --> <rect x="20" y="180" width="180" height="12" fill="#8B4513" rx="2" /> <rect x="20" y="192" width="12" height="58" fill="#8B4513" /> <rect x="188" y="192" width="12" height="58" fill="#8B4513" /> <!-- G-clamp --> <rect x="150" y="160" width="30" height="24" fill="#555" rx="3" /> <rect x="160" y="148" width="10" height="14" fill="#777" /> <circle cx="165" cy="145" r="5" fill="#999" /> <text x="145" y="210" font-size="9" fill="#333">
+       Pengapit-G
+      </text> <!-- Hacksaw blade --> <rect x="170" y="172" width="200" height="4" fill="#4a90d9" rx="1" /> <text x="250" y="168" font-size="9" fill="#333">
+       Bilah gergaji
+      </text> <!-- Plasticine --> <ellipse cx="365" cy="174" rx="14" ry="10" fill="#e74c3c" /> <text x="340" y="200" font-size="9" fill="#333">
+       Plastisin
+      </text> <!-- Motion arrows --> <path d="M365 155 Q375 140 365 125" fill="none" stroke="#333" stroke-width="1.5" marker-end="url(#arrow)" /> <path d="M365 155 Q355 140 365 125" fill="none" stroke="#333" stroke-width="1.5" /> <text x="345" y="120" font-size="8" fill="#333">
+       Ayunan
+      </text> <!-- Stopwatch --> <circle cx="60" cy="80" r="22" fill="#f0f0f0" stroke="#333" stroke-width="2" /> <line x1="60" y1="80" x2="60" y2="64" stroke="#333" stroke-width="2" /> <line x1="60" y1="80" x2="70" y2="85" stroke="#333" stroke-width="1.5" /> <rect x="57" y="55" width="6" height="5" fill="#333" /> <text x="40" y="115" font-size="9" fill="#333">
+       Jam randik
+      </text> <defs>
+       <marker id="arrow" markerwidth="6" markerheight="6" refx="5" refy="3" orient="auto">
+        <path d="M0,0 L6,3 L0,6 Z" fill="#333" />
+       </marker>
+      </defs>
+     </svg>
+    </div><!-- Prosedur -->
+    <div class="mb-6 p-4 bg-white/80 rounded-xl shadow">
+     <p data-template-id="label-prosedur" class="canva-text font-bold mb-3"></p>
+     <p class="text-sm mb-3 text-gray-600">Susunkan prosedur mengikut urutan yang betul:</p>
+     <div id="procedure-slots">
+      <div class="procedure-slot" data-order="1">
+       <span class="text-gray-400">Langkah 1</span>
+      </div>
+      <div class="procedure-slot" data-order="2">
+       <span class="text-gray-400">Langkah 2</span>
+      </div>
+      <div class="procedure-slot" data-order="3">
+       <span class="text-gray-400">Langkah 3</span>
+      </div>
+      <div class="procedure-slot" data-order="4">
+       <span class="text-gray-400">Langkah 4</span>
+      </div>
+      <div class="procedure-slot" data-order="5">
+       <span class="text-gray-400">Langkah 5</span>
+      </div>
+     </div>
+     <div class="mt-4 flex flex-wrap gap-2" id="bank-prosedur"></div>
+    </div><button data-template-id="btn-next3" class="canva-button w-full py-3 rounded-xl font-bold no-print transition hover:scale-105" onclick="goToSection(4)"></button>
+   </div><!-- SECTION 4 -->
+   <div id="section4" class="section">
+    <h2 data-template-id="sec4-title" class="canva-text text-xl font-bold mb-4"></h2><!-- Jadual Pemerhatian -->
+    <div class="mb-6 p-4 bg-white/80 rounded-xl shadow overflow-x-auto">
+     <p data-template-id="label-jadual" class="canva-text font-bold mb-3"></p>
+     <table class="w-full border-collapse border border-gray-300 text-center text-sm">
+      <tbody>
+       <tr>
+        <td class="border border-gray-300 p-2"><span class="table-drop" data-answer="Jisim plastisin (g)" data-group="jadual"></span></td>
+        <td class="border border-gray-300 p-2"><span class="table-drop" data-answer="Masa untuk 10 ayunan lengkap (s)" data-group="jadual"></span></td>
+       </tr>
+       <tr>
+        <td class="border border-gray-300 p-2"><span class="table-drop" data-answer="30" data-group="jadual"></span></td>
+        <td class="border border-gray-300 p-2"><span class="table-drop" data-answer="5" data-group="jadual"></span></td>
+       </tr>
+       <tr>
+        <td class="border border-gray-300 p-2"><span class="table-drop" data-answer="40" data-group="jadual"></span></td>
+        <td class="border border-gray-300 p-2"><span class="table-drop" data-answer="10" data-group="jadual"></span></td>
+       </tr>
+       <tr>
+        <td class="border border-gray-300 p-2"><span class="table-drop" data-answer="50" data-group="jadual"></span></td>
+        <td class="border border-gray-300 p-2"><span class="table-drop" data-answer="15" data-group="jadual"></span></td>
+       </tr>
+       <tr>
+        <td class="border border-gray-300 p-2"><span class="table-drop" data-answer="60" data-group="jadual"></span></td>
+        <td class="border border-gray-300 p-2"><span class="table-drop" data-answer="20" data-group="jadual"></span></td>
+       </tr>
+       <tr>
+        <td class="border border-gray-300 p-2"><span class="table-drop" data-answer="70" data-group="jadual"></span></td>
+        <td class="border border-gray-300 p-2"><span class="table-drop" data-answer="25" data-group="jadual"></span></td>
+       </tr>
+      </tbody>
+     </table>
+     <div class="mt-3 flex flex-wrap gap-2" id="bank-jadual"></div>
+    </div><!-- Perbincangan -->
+    <div class="mb-6 p-4 bg-white/80 rounded-xl shadow">
+     <p data-template-id="label-perbincangan" class="canva-text font-bold mb-3"></p>
+     <p class="font-medium mb-1">1. Apakah hubungan antara jisim plastisin dan inersia?</p>
+     <div class="mb-4">
+      <span class="drop-zone" data-answer="Semakin bertambah jisim plastisin, semakin bertambah inersia" data-group="perb"></span>
+     </div>
+     <p class="font-medium mb-1">2. Apakah langkah berjaga-jaga dalam eksperimen ini?</p>
+     <div class="mb-4">
+      <span class="drop-zone" data-answer="Memastikan panjang bilah gergaji yang sama" data-group="perb"></span>
+     </div>
+     <p class="font-medium mb-1">3. Sebuah kapal terbang memerlukan landasan yang panjang semasa mendarat untuk mengurangkan kesan inersia. Berdasarkan jadual keputusan, sokong pernyataan ini.</p>
+     <div class="mb-4">
+      <span class="drop-zone" data-answer="Masa yang diambil untuk 10 ayunan lengkap bagi jisim plastisin 70g adalah lebih lama berbanding jisim 30g" data-group="perb"></span>
+     </div>
+     <div class="mt-3 flex flex-wrap gap-2" id="bank-perb"></div>
+    </div><!-- Definisi Operasi -->
+    <div class="mb-6 p-4 bg-white/80 rounded-xl shadow">
+     <p data-template-id="label-definisi" class="canva-text font-bold mb-3"></p>
+     <p class="leading-relaxed">Inersia ialah <span class="drop-zone" data-answer="keadaan" data-group="def"></span> yang ditunjukkan oleh <span class="drop-zone" data-answer="masa yang diambil untuk 10 ayunan lengkap" data-group="def"></span> apabila <span class="drop-zone" data-answer="plastisin pada bilah gergaji disesarkan dan dilepaskan" data-group="def"></span></p>
+     <div class="mt-3 flex flex-wrap gap-2" id="bank-def"></div>
+    </div><!-- Buttons -->
+    <div class="flex flex-wrap gap-3 no-print"><button data-template-id="btn-cetak" class="canva-button flex-1 py-3 rounded-xl font-bold transition hover:scale-105" onclick="window.print()"></button> <button data-template-id="btn-email" class="canva-button flex-1 py-3 rounded-xl font-bold transition hover:scale-105" onclick="sendEmail()"></button>
+    </div>
+   </div>
+  </main>
+  <script src="/_sdk/editing_sdk.js"></script>
+  <script>
+        // Section navigation
+        function goToSection(n) {
+            if (n === 2) {
+                const nama = document.getElementById('nama').value.trim();
+                const kelas = document.getElementById('kelas').value.trim();
+                if (!nama || !kelas) { showToast('Sila isikan nama dan kelas.'); return; }
+            }
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById('section' + n).classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        // Toast
+        function showToast(msg) {
+            const t = document.createElement('div');
+            t.className = 'fixed top-4 left-1/2 -translate-x-1/2 bg-red-500 text-white px-6 py-3 rounded-xl shadow-lg z-50 font-medium';
+            t.textContent = msg;
+            document.body.appendChild(t);
+            setTimeout(() => t.remove(), 3000);
+        }
+
+        // Drag and Drop
+        let draggedEl = null;
+
+        // Procedure data (shuffled)
+        const procedures = [
+            { order: 3, text: 'Sesar dan lepaskan bilah gergaji.' },
+            { order: 5, text: 'Ulang langkah 1-4 dengan menggunakan jisim plastisin 40g, 50g, 60g dan 70g.' },
+            { order: 1, text: 'Apit bilah gergaji pada kaki meja dengan pengapit-G.' },
+            { order: 4, text: 'Rekodkan masa yang diambil untuk 10 ayunan lengkap dengan menggunakan jam randik.' },
+            { order: 2, text: 'Lekatkan plastisin berjisim 30g pada hujung bilah gergaji.' }
+        ];
+
+        // Jadual bank items
+        const jadualItems = ['Jisim plastisin (g)', 'Masa untuk 10 ayunan lengkap (s)', '30', '40', '50', '60', '70', '5', '10', '15', '20', '25'];
+
+        // Perbincangan bank
+        const perbItems = [
+            'Semakin bertambah jisim plastisin, semakin bertambah inersia',
+            'Memastikan panjang bilah gergaji yang sama',
+            'Masa yang diambil untuk 10 ayunan lengkap bagi jisim plastisin 70g adalah lebih lama berbanding jisim 30g',
+            'Semakin berkurang jisim, semakin bertambah inersia'
+        ];
+
+        // Definisi bank
+        const defItems = ['keadaan', 'masa yang diambil untuk 10 ayunan lengkap', 'plastisin pada bilah gergaji disesarkan dan dilepaskan', 'halaju objek', 'daya graviti'];
+
+        function shuffle(arr) { for (let i = arr.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [arr[i], arr[j]] = [arr[j], arr[i]]; } return arr; }
+
+        function createDragItem(value, group) {
+            const el = document.createElement('span');
+            el.className = 'drag-item';
+            el.textContent = value;
+            el.dataset.value = value;
+            el.dataset.group = group;
+            el.draggable = true;
+            el.addEventListener('dragstart', onDragStart);
+            el.addEventListener('dragend', onDragEnd);
+            el.addEventListener('touchstart', onTouchStart, { passive: false });
+            el.addEventListener('touchmove', onTouchMove, { passive: false });
+            el.addEventListener('touchend', onTouchEnd);
+            return el;
+        }
+
+        function initBanks() {
+            // Prosedur
+            const bankP = document.getElementById('bank-prosedur');
+            shuffle([...procedures]).forEach(p => {
+                const el = createDragItem(p.text, 'prosedur');
+                el.dataset.order = p.order;
+                bankP.appendChild(el);
+            });
+
+            // Jadual
+            const bankJ = document.getElementById('bank-jadual');
+            shuffle([...jadualItems]).forEach(v => bankJ.appendChild(createDragItem(v, 'jadual')));
+
+            // Perbincangan
+            const bankPerb = document.getElementById('bank-perb');
+            shuffle([...perbItems]).forEach(v => bankPerb.appendChild(createDragItem(v, 'perb')));
+
+            // Definisi
+            const bankDef = document.getElementById('bank-def');
+            shuffle([...defItems]).forEach(v => bankDef.appendChild(createDragItem(v, 'def')));
+        }
+
+        // Drag events
+        function onDragStart(e) {
+            draggedEl = e.target;
+            e.target.classList.add('dragging');
+            e.dataTransfer.setData('text/plain', '');
+        }
+        function onDragEnd(e) { e.target.classList.remove('dragging'); draggedEl = null; }
+
+        // Drop zones
+        document.addEventListener('dragover', e => {
+            e.preventDefault();
+            const zone = e.target.closest('.drop-zone, .procedure-slot, .table-drop');
+            if (zone && !zone.classList.contains('filled')) zone.classList.add('drag-over');
+        });
+        document.addEventListener('dragleave', e => {
+            const zone = e.target.closest('.drop-zone, .procedure-slot, .table-drop');
+            if (zone) zone.classList.remove('drag-over');
+        });
+        document.addEventListener('drop', e => {
+            e.preventDefault();
+            const zone = e.target.closest('.drop-zone, .procedure-slot, .table-drop');
+            if (!zone || !draggedEl || zone.classList.contains('filled')) return;
+            zone.classList.remove('drag-over');
+            placeItem(zone, draggedEl);
+        });
+
+        function placeItem(zone, item) {
+            const group = zone.dataset.group;
+            if (item.dataset.group !== group) return;
+            zone.classList.add('filled');
+            zone.textContent = item.dataset.value || item.textContent;
+            zone.dataset.placed = item.dataset.value || item.textContent;
+            item.classList.add('used');
+        }
+
+        // Touch support
+        let touchClone = null;
+        let touchSource = null;
+        function onTouchStart(e) {
+            touchSource = e.target.closest('.drag-item');
+            if (!touchSource) return;
+            e.preventDefault();
+            touchClone = touchSource.cloneNode(true);
+            touchClone.style.position = 'fixed';
+            touchClone.style.pointerEvents = 'none';
+            touchClone.style.zIndex = '9999';
+            touchClone.style.opacity = '0.8';
+            document.body.appendChild(touchClone);
+            moveTouchClone(e.touches[0]);
+        }
+        function onTouchMove(e) {
+            if (!touchClone) return;
+            e.preventDefault();
+            moveTouchClone(e.touches[0]);
+        }
+        function onTouchEnd(e) {
+            if (!touchClone || !touchSource) return;
+            const touch = e.changedTouches[0];
+            touchClone.remove();
+            touchClone = null;
+            const el = document.elementFromPoint(touch.clientX, touch.clientY);
+            const zone = el ? el.closest('.drop-zone, .procedure-slot, .table-drop') : null;
+            if (zone && !zone.classList.contains('filled')) {
+                placeItem(zone, touchSource);
+            }
+            touchSource = null;
+        }
+        function moveTouchClone(touch) {
+            if (!touchClone) return;
+            touchClone.style.left = (touch.clientX - 40) + 'px';
+            touchClone.style.top = (touch.clientY - 20) + 'px';
+        }
+
+        // Email
+        function sendEmail() {
+            const nama = document.getElementById('nama').value;
+            const kelas = document.getElementById('kelas').value;
+            let body = `Nama: ${nama}%0AKelas: ${kelas}%0A%0AJawapan Eksperimen Maya Inersia%0A`;
+            document.querySelectorAll('.drop-zone.filled, .procedure-slot.filled, .table-drop.filled').forEach(z => {
+                body += `${z.dataset.placed || z.textContent}%0A`;
+            });
+            window.open(`mailto:?subject=Jawapan Eksperimen Maya - ${nama}&body=${body}`, '_blank');
+        }
+
+        // Init
+        initBanks();
+        lucide.createIcons();
+    </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a0d5ebb7e1a40646',t:'MTc4MTczOTg1MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
